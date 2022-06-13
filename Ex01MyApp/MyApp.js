@@ -2,7 +2,7 @@
 // react 라이브러리에 존재하는 Component class 를 사용하기 위해 import
 import React from "react";
 import { Component } from "react"; //react.js js 생략 가능해서 저렇게 쓴고임
-import { Button, Text, View } from "react-native";
+import { Button, Text, View, StyleSheet, Image } from "react-native";
 
 // RN(React Native) 에서는 반드시 Componant를 상속 한 클래스만 화면에 보일 수 있음.
 class MyApp extends Component{
@@ -31,13 +31,41 @@ class MyApp extends Component{
         // 기본적으로 보여지는 스타일링은 CSS 를 모티브로 함.
         //단, 스타일을 CSS 문서로 적용하는 것이 아니라 !! 스타일값을 가진 
         // 객체를 만들어 속성으로 지정해서 적용함 !!
-        return ( 
-            <View style={rootView}>
-                    {/* 이 영역은 javaScript */}
-                <Text style={textStyle}>Hello world {name}! </Text>
-                <Text style={plainText}>Nice To Meet You ! </Text>
-                {/* Button은 스타일 작업 불가. style 속성이 없음. */}
-                <Button title={btnTitle} style={btnStyle}></Button>
+
+        // return ( 
+        //     <View style={style.rootContainer}>
+        //             {/* 이 영역은 javaScript */}
+        //         <Text style={style.mainText}>Hello world {name}! </Text>
+        //         <Text style={style.plainText}>Nice To Meet You ! </Text>
+        //         {/* Button은 스타일 작업 불가. style 속성이 없음. */}
+        //         <View style={{marginTop:10, width:150,}}>
+        //            <Button title={btnTitle} style={btnStyle}></Button> 
+        //         </View>
+                
+
+        //     </View>
+        // )
+
+        // 이미지 컴포넌트도 한 번 연습해보기, 
+
+        return (
+            <View style={style.rootContainer}>
+                <Text style={style.mainText}>Hello {name}</Text>
+                <Text style={style.plainText}>Nice To Meet You</Text>
+                <Button title="Button"></Button>
+                <Button title={btnTitle} color="orange"></Button>
+                <View style={{ marginTop:10, width:200}}>
+                <Button title= '버튼' color="#841584"></Button>
+                </View>
+
+                {/* 이미지 Componant 보여주기 */}
+                {/* 이미지의 경로를 그냥 문자열로 쓰는게 아니라 */}
+                {/* JS의 require() 함수를 이용해야만 함 <- require()는 경로를 객체로 만들어 줌 */}
+                <Image source={ require("./image/img03.jpg") } style={{margin:4, flex:1, resizeMode:'cover', width:null}}></Image>
+
+                
+
+
 
             </View>
         )
@@ -46,6 +74,27 @@ class MyApp extends Component{
     }
 
 } //MyApp Class
+
+// 아래처럼 개별로 스타일객체를 만들면 관리도 어렵고 자동완성기능도 제한적이어서
+// 너무 별로임. 그래서 모든 스타일 관련 객첼르 하나로 묶는 클래스가 존재 함.
+const style = StyleSheet.create( {
+    rootContainer:{
+        backgroundColor:'#AAFFCC',
+        flex:1,
+        padding:16, // 안써도 에러 안나긴 하는데 다음에 모 쓸 지 몰라서 일단 찍어두는 습관 ㄱㄱ
+    },
+    mainText:{
+        color:'blue',
+        fontSize:20,
+        fontStyle:'italic',
+        margin:16,
+
+    },
+    plainText:{
+        margin:8,
+        color:'green'
+    }
+})
 
 // CSS
 // MyApp Class 가 보여주는 컴포넌트들의 스타일 값을 가진 객체 생성
