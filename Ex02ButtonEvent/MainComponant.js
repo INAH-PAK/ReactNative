@@ -1,12 +1,19 @@
 import React,{Component} from 'react'
-import{View, Text, Button,StyleSheet, Alert}  from 'react-native'
+import{View, Text, Button,StyleSheet, Alert, Image}  from 'react-native'
 
 class MainComponent extends Component{
     
     // 맴버변수 ( == property ) 
     // Text Componant 가 보여줄 글씨를 가지고 있는 변수
-    // Class 안에서 변수 선언시 키워드 안씀 !!!!!!!1  -> 메소드 안에서 이 변수를 부를 땐 this. 
+    // Class 안에서 변수 선언시 키워드 안씀 !!!!!!!1  -> 메소드 안에서 이 변수를 부를 땐 this🤯🤯
     aa = "Hello"
+
+    // ⁡⁢⁣⁣​‌‍‌𝙘𝙤𝙢𝙥𝙤𝙣𝙖𝙣𝙩 𝙘𝙡𝙖𝙨𝙨 안에서 화면갱신에 영향을 주는 특별한 맴버변수가 이미 존재 함.​⁡
+    // state (상태) - 값이 아닌 객체르 가짐.
+    state = {
+        msg : "Hello",
+        img : require("./image/siba.png"),
+    }
 
     render(){
         return (
@@ -14,6 +21,7 @@ class MainComponent extends Component{
                 <Text style = {style.plainText}>{this.aa}</Text> 
                 {/* 이 컴포넌트의 글씨가 만약 변경되어야 한다면,  */}
                 {/* 이 텍스트 컴포넌트는 글씨를 직접 쓰지 않고, 변수를 만들어 값을 보여주도록 해야만 함. */}
+                <Text style = {style.plainText}>{this.state.msg}</Text> 
 
                 {/*  버튼의 onPress 에는 꼭! 콜백 함수만 등록하는 거임 !!!  */}
                 <Button onPress={ clickBtnFuntion3 } title='Button'></Button>
@@ -23,6 +31,13 @@ class MainComponent extends Component{
                 {/*  JS 에서는 맴버를 지칭할 때, 반 !! 드 !! 시 !! [this.] 키워드가 필요 !!! */}
                 <Button onPress={ this.clickBtn } title='Button2'></Button>
                 <Button onPress={ this.changeTextByArrow } title='changeTextByArrow'></Button>
+                <Button onPress={ this.changeTextByState } title='changeTextByState'></Button>
+                <View style={{marginTop:40}}></View>
+
+                <Button onPress={ this.changeImage } title='changeImage' color="green"></Button>
+
+                <Image style={style.img} source={this.state.img}></Image>
+
             </View>
         )
     }
@@ -45,8 +60,28 @@ class MainComponent extends Component{
         changeTextByArrow = ()=>{
             // 이 화살표 함수의 this == Main Componant class 
             this.aa = "Nice To Meet You"
+            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            // 애석하게 ,,, 변수값을 바꾸어도 . . .  화면 갱신이 안됨 . 
+            // 모든 맴버변수가 화면 갱신에 영향을 주진 않음.
+            // 아주 특별한 변수(state)만이 화면 갱신에 영향을 줌,
         }
 
+        changeTextByState= ()=>{
+            this.state.msg = "Nice To Meet You"
+            // 이건 에러는 아니지만 이렇게 하면 화면 갱시 안됨. 
+            // 자동으로 화면갱신이 되려면. .  state 값을 변경하는 기능메소드를 호출해야 함
+            this.setState({msg:"Nice To Meet You"})
+        }
+
+        // 이미지를 변경하는 기능 메소드
+        changeImage = ()=>{
+            // 화면갱신에 영향을 주는 특별한 변수  -> state를 변경
+            //Image 컴포넌트가 보여주는 이미지 값을 변경
+            // 단, state에 여러 맴버값들이 있더라도, 필요한 맴버만 설정하면됨.
+
+            this.setState({img:require("./image/ch_sandi.jpg")}) 
+
+        }
 
 }// Main
 
@@ -77,7 +112,13 @@ const style = StyleSheet.create({
         marginBottom: 16,
         color : 'black' , 
         fontWeight : 'bold',
-    }
+    },
+    img:{
+        marginTop:8,
+        flex:1,
+        width: null,
+        resizeMode:'cover',
+    },
 
 })
 
