@@ -8,7 +8,8 @@ const BigCatalog = (props)=>{
     return(
         <TouchableOpacity
             // activeOpacity : 클릭시 눌러지는 효과 정도 ~1.0
-            activeOpacity={0.9}>
+            activeOpacity={0.9}
+            onPress={()=>props.onPress(props.movie.id)}>
                 {/* 1. 커버 이미지 */}
             <Image
                 source={{uri: props.movie.large_cover_image}}

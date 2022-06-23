@@ -47,7 +47,7 @@ export default class BigCatalogList extends Component{
                     pagingEnabled={true}
                     data={this.state.data}
                     renderItem={(obj)=>{ // 배열요소값(item), 인덱스 번호(index)를 가진 객체 하나가 파라미터로 전달됨. -> 
-                        return <BigCatalog movie={obj.item}></BigCatalog>
+                        return <BigCatalog onPress={this.props.onPress} movie={obj.item}></BigCatalog>
                     }}>
                 </FlatList>
             </View>

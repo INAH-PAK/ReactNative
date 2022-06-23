@@ -5,6 +5,7 @@ import { Header } from 'react-native/Libraries/NewAppScreen'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import BigCatalogList from '../components_movie/BigCatalogList'
+import SmallCatalogList from '../screens_movie/SmallCatalogList'
 
 
 export default class MovieList extends Component{ 
@@ -36,12 +37,22 @@ export default class MovieList extends Component{
                 {/* 큰 타이틀 이미지를 보여주는 곳에 정보를 가져오는 fetch(: 내려받다.) 작업의 코드가  */}
                 {/* 복잡할 수 있으니까, 별도의 Componrnt를 만들어서 작업을 분리 !  */}
                 {/* 결국 난 여기서 BigCatalog 하나만 쓰면 얘가 알아서 작업 다 하는 것 처럼 ! */}
-                <BigCatalogList url={bigUrl}></BigCatalogList>
+                <BigCatalogList 
+                url={bigUrl}
+                onPress={(id)=>this.props.navigation.navigate('MovieDetail',{id,})}></BigCatalogList>
                 
                 {/* 총 3개의 최신 등록순 , 평점순, 다운로드 순 영화 목록을 보여주는 작은 사이즈의 가로 스크롤 리스트 */}
                 {/* 이 세 종류의 리스트가 모두 같은 디자인임. */}
                 {/* 그래서 별도의 Component를 만들어서 재사용 하자. */}
-                <SmallCatalogList></SmallCatalogList>
+                <SmallCatalogList 
+                 onPress={ ( id )=>{this.props.navigation.navigate('MovieDetail',{id, })}} 
+                 // id: json 보면 첫번째 값으로 영화 식별자id 있음.
+                 // navigate('MovieDetail',{})}}  : 두번째 값은 안드로이드의 intentfh putExtra 로 값 넘겨주는 것처럼 , 객체로 하나 넘겨줌.
+                 // JS는 만약 식별자와 값이 같다면, 그냥 id 넣으면 걍 id 하나만 써도 알아먹음
+                 title="최신등록순" 
+                 url={recentUrl}></SmallCatalogList>
+                <SmallCatalogList onPress={(id)=>{this.props.navigation.navigate('MovieDetail',{id,})}} title="평점순" url={ratingtUrl}></SmallCatalogList>
+                <SmallCatalogList onPress={id=>this.props.navigation.navigate('MovieDetail',{id,})} title="다운로드순" url={downloadUrl}></SmallCatalogList>
             </ScrollView>
         )
     }
