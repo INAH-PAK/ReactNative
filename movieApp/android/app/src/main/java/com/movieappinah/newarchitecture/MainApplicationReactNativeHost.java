@@ -1,4 +1,4 @@
-package com.movieapp.newarchitecture;
+package com.movieappinah.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.movieapp.BuildConfig;
-import com.movieapp.newarchitecture.components.MainComponentsRegistry;
-import com.movieapp.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.movieappinah.BuildConfig;
+import com.movieappinah.newarchitecture.components.MainComponentsRegistry;
+import com.movieappinah.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

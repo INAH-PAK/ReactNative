@@ -1,4 +1,4 @@
-package com.movieapp;
+package com.movieappinah;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
